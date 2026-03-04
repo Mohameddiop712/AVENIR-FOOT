@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maillots de l'Équipe – 2025/2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --dark:   #03000f;
+  --deep:   #08041e;
+  --violet: #7c3aed;
+  --cyan:   #06b6d4;
+  --pink:   #ec4899;
+  --green:  #10b981;
+  --text:   #f0eeff;
+  --muted:  rgba(240,238,255,0.42);
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── FOND ANIMÉ ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 10%,  rgba(124,58,237,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 88% 85%,  rgba(6,182,212,0.18)  0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 55% 55%,  rgba(236,72,153,0.10) 0%, transparent 50%),
+    var(--deep);
+  pointer-events: none;
+}
+
+/* Grille subtile */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 55px 55px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+
+/* ── LAYOUT ── */
+.page {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+.wrapper { width: 100%; max-width: 540px; }
+
+/* ── EN-TÊTE ── */
+.header { text-align: center; margin-bottom: 2rem; }
+
+.team-name {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 6vw, 2.8rem);
+  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, #fff 0%, #c4b5fd 40%, #06b6d4 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(124,58,237,0.5));
+  margin-bottom: 0.5rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: 100px;
+  padding: 5px 16px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cyan);
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+  animation: blink 2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+/* ── CARTE ── */
+.card {
+  background: rgba(8,4,30,0.72);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(124,58,237,0.16);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  position: relative; overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 40px 100px rgba(0,0,0,0.65),
+    0 0 70px rgba(124,58,237,0.07);
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+/* Ligne lumineuse animée en haut */
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, #7c3aed, #06b6d4, #ec4899, transparent);
+  animation: beam 3s linear infinite;
+}
+@keyframes beam { to { left: 100%; } }
+
+/* Lueur intérieure */
+.card::after {
+  content: '';
+  position: absolute; inset: 0; border-radius: 24px;
+  background: radial-gradient(ellipse 60% 30% at 50% 0%, rgba(124,58,237,0.07), transparent 70%);
+  pointer-events: none;
+}
+
+/* ── TITRE CARTE ── */
+.card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+
+.jersey-icon {
+  width: 52px; height: 52px; flex-shrink: 0;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 8px 28px rgba(124,58,237,0.45);
+  animation: float 4s ease infinite alternate;
+}
+@keyframes float { from{transform:translateY(0);} to{transform:translateY(-5px);} }
+
+.card-title h2 {
+  font-family: 'Orbitron', monospace;
+  font-weight: 800;
+  font-size: clamp(0.9rem, 2.8vw, 1.25rem);
+  line-height: 1.3;
+  background: linear-gradient(135deg, #fff 20%, #c4b5fd 60%, #06b6d4);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.card-title p {
+  font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5;
+}
+
+/* ── CHAMPS ── */
+.field { margin-bottom: 1.3rem; }
+
+label {
+  display: block;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(240,238,255,0.38);
+  margin-bottom: 0.55rem;
+  transition: color 0.3s;
+}
+.field:focus-within label { color: var(--cyan); }
+
+.input-wrap { position: relative; }
+
+.icon {
+  position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%);
+  font-size: 0.95rem; opacity: 0.4; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.field:focus-within .icon { opacity: 1; transform: translateY(-50%) scale(1.1); }
+
+input, select {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(124,58,237,0.18);
+  border-radius: 12px;
+  padding: 0.9rem 1rem 0.9rem 2.8rem;
+  font-size: 0.93rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+input::placeholder { color: rgba(240,238,255,0.2); }
+
+input:focus, select:focus {
+  border-color: rgba(124,58,237,0.65);
+  background: rgba(124,58,237,0.07);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.14), 0 0 20px rgba(124,58,237,0.1);
+  transform: translateY(-1px);
+}
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(167,139,250,0.5)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 16px;
+  padding-right: 2.4rem;
+}
+select option { background: #0d0820; color: #fff; }
+
+/* Erreur */
+.field.error input,
+.field.error select {
+  border-color: rgba(236,72,153,0.6);
+  box-shadow: 0 0 0 3px rgba(236,72,153,0.12);
+}
+.err {
+  font-size: 0.73rem; color: #f472b6;
+  margin-top: 0.35rem; padding-left: 0.2rem;
+  display: none;
+}
+.field.error .err { display: block; animation: errIn 0.2s ease; }
+@keyframes errIn { from{opacity:0;transform:translateY(-4px);} to{opacity:1;transform:none;} }
+
+/* Séparateur */
+.sep {
+  height: 1px; margin: 1.8rem 0;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.25), rgba(6,182,212,0.25), transparent);
+}
+
+/* ── BOUTON ── */
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #5b21b6, #7c3aed, #0891b2, #06b6d4);
+  background-size: 250% 250%;
+  border: none; border-radius: 12px;
+  padding: 1rem;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em;
+  color: #fff; cursor: pointer;
+  position: relative; overflow: hidden;
+  box-shadow: 0 8px 30px rgba(124,58,237,0.4), 0 0 0 1px rgba(255,255,255,0.07) inset;
+  animation: gradShift 5s ease infinite;
+  transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+@keyframes gradShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+.btn-submit:hover  { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(124,58,237,0.55); }
+.btn-submit:active { transform: translateY(0) scale(0.98); }
+
+.btn-shine {
+  position: absolute; top:0; left:-100%; width:50%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-18deg); transition: left 0.5s;
+}
+.btn-submit:hover .btn-shine { left: 160%; }
+
+.btn-inner { position: relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:8px; }
+
+/* Spinner */
+.spinner {
+  width:17px; height:17px;
+  border:2px solid rgba(255,255,255,0.25);
+  border-top-color:#fff; border-radius:50%;
+  animation: spin 0.7s linear infinite; display:none;
+}
+@keyframes spin { to{transform:rotate(360deg);} }
+.btn-submit.loading .btn-text { display:none; }
+.btn-submit.loading .spinner  { display:block; }
+
+/* ── SUCCÈS ── */
+#successSection { display: none; text-align: center; }
+
+.success-rings {
+  width:80px; height:80px;
+  margin: 0 auto 1.5rem;
+  position: relative; display:flex; align-items:center; justify-content:center;
+}
+.success-rings::before, .success-rings::after {
+  content:''; position:absolute; inset:0; border-radius:50%; border:2px solid transparent;
+}
+.success-rings::before { border-top-color:var(--green); border-right-color:var(--green); animation:rSpin 2.5s linear infinite; }
+.success-rings::after  { border-bottom-color:var(--cyan); border-left-color:var(--cyan); animation:rSpinR 3.5s linear infinite; }
+@keyframes rSpin  { to{transform:rotate(360deg);} }
+@keyframes rSpinR { to{transform:rotate(-360deg);} }
+
+.check-icon { font-size:2rem; position:relative; z-index:1; animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+@keyframes popIn { from{transform:scale(0) rotate(-30deg);opacity:0;} to{transform:scale(1);opacity:1;} }
+
+.success-name {
+  font-family: 'Orbitron', monospace; font-weight: 900;
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #fff, #c4b5fd, #06b6d4);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 0.3rem;
+  animation: nameIn 0.7s ease 0.2s both;
+}
+@keyframes nameIn { from{opacity:0;transform:translateY(15px);letter-spacing:0.3em;} to{opacity:1;transform:none;letter-spacing:0.1em;} }
+
+.success-label {
+  font-family:'Orbitron',monospace; font-size:0.75rem; font-weight:700;
+  color: var(--green); margin-bottom:0.4rem;
+  animation: fd 0.5s ease 0.4s both;
+}
+.success-msg {
+  font-size:0.87rem; color:var(--muted); line-height:1.6;
+  max-width:320px; margin:0 auto 1.6rem;
+  animation: fd 0.5s ease 0.5s both;
+}
+
+.recap {
+  background: rgba(16,185,129,0.05);
+  border: 1px solid rgba(16,185,129,0.15);
+  border-radius: 14px; padding:1.1rem 1.4rem;
+  text-align:left; margin-bottom:1.6rem;
+  animation: fd 0.5s ease 0.6s both;
+}
+.recap-row {
+  display:flex; align-items:center; gap:10px;
+  padding:0.48rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  font-size:0.88rem;
+}
+.recap-row:last-child { border-bottom:none; }
+.recap-lbl {
+  font-family:'Orbitron',monospace; font-size:0.57rem;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:rgba(240,238,255,0.32); min-width:90px;
+}
+
+.btn-reset {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius:10px; padding:0.7rem 2rem;
+  color:var(--muted);
+  font-family:'Orbitron',monospace; font-size:0.65rem; letter-spacing:0.1em;
+  cursor:pointer; transition:all 0.3s;
+  animation: fd 0.5s ease 0.7s both;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-reset:hover { background:rgba(124,58,237,0.1); color:var(--text); border-color:rgba(124,58,237,0.4); }
+
+/* ── FOOTER ── */
+.footer {
+  text-align:center; margin-top:1.4rem;
+  font-family:'Orbitron',monospace; font-size:0.55rem;
+  letter-spacing:0.14em; color:rgba(240,238,255,0.14);
+  text-transform:uppercase;
+  animation: fadeUp 0.6s ease 0.5s both;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:none;} }
+@keyframes fd     { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:none;} }
+
+/* ── RESPONSIVE ── */
+@media(max-width:480px) {
+  .card { padding:2rem 1.3rem; border-radius:20px; }
+  .card-header { gap:0.8rem; }
+  .jersey-icon { width:44px; height:44px; font-size:1.2rem; border-radius:12px; }
+  .card-title h2 { font-size:0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="wrapper">
+
+    <!-- EN-TÊTE -->
+    <div class="header">
+      <div class="team-name">AVENIR FOOT</div>
+      <div class="badge"><div class="dot"></div>Saison 2025 – 2026</div>
+    </div>
+
+    <!-- CARTE -->
+    <div class="card">
+
+      <!-- FORMULAIRE -->
+      <div id="formSection">
+        <div class="card-header">
+          <div class="jersey-icon">👕</div>
+          <div class="card-title">
+            <h2>Formulaire de Confection des Maillots</h2>
+            <p>Remplissez le formulaire pour enregistrer votre commande.</p>
+          </div>
+        </div>
+
+        <form id="jerseyForm" novalidate>
+
+          <div class="field" id="f-name">
+            <label for="nomMaillot">Nom sur le Maillot</label>
+            <div class="input-wrap">
+              <span class="icon">👤</span>
+              <input type="text" id="nomMaillot" placeholder="Ex : OMAR F." autocomplete="off">
+            </div>
+            <div class="err">Veuillez saisir le nom à inscrire sur le maillot.</div>
+          </div>
+
+          <div class="field" id="f-num">
+            <label for="numero">Numéro du Maillot</label>
+            <div class="input-wrap">
+              <span class="icon">🔢</span>
+              <input type="number" id="numero" placeholder="Ex : 10" min="1" max="99" inputmode="numeric">
+            </div>
+            <div class="err">Veuillez saisir un numéro entre 1 et 99.</div>
+          </div>
+
+          <div class="field" id="f-size">
+            <label for="taille">Taille du Maillot</label>
+            <div class="input-wrap">
+              <span class="icon">📐</span>
+              <select id="taille">
+                <option value="" disabled selected>Sélectionner une taille</option>
+                <option value="XS">XS — Extra Small</option>
+                <option value="S">S — Small</option>
+                <option value="M">M — Medium</option>
+                <option value="L">L — Large</option>
+                <option value="XL">XL — Extra Large</option>
+                <option value="XXL">XXL — Double Extra Large</option>
+              </select>
+            </div>
+            <div class="err">Veuillez sélectionner une taille.</div>
+          </div>
+
+          <div class="sep"></div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <div class="btn-shine"></div>
+            <div class="btn-inner">
+              <span class="btn-text">⚡ Enregistrer ma commande</span>
+              <div class="spinner"></div>
+            </div>
+          </button>
+
+        </form>
+      </div>
+
+      <!-- SUCCÈS -->
+      <div id="successSection">
+        <div class="success-rings"><div class="check-icon">✓</div></div>
+        <div class="success-name" id="sNameBig">—</div>
+        <div class="success-label">Demande enregistrée avec succès !</div>
+        <p class="success-msg">Votre maillot personnalisé sera prêt pour la prochaine distribution de l'équipe.</p>
+        <div class="recap">
+          <div class="recap-row"><span class="recap-lbl">👤 Nom</span><span id="sName">—</span></div>
+          <div class="recap-row"><span class="recap-lbl">🔢 Numéro</span><span id="sNum">—</span></div>
+          <div class="recap-row"><span class="recap-lbl">📐 Taille</span><span id="sSize">—</span></div>
+        </div>
+        <button class="btn-reset" id="resetBtn">↩ Nouvelle commande</button>
+      </div>
+
+    </div>
+
+    <p class="footer">Formulaire officiel &bull; Saison 2025–2026<br><span style="color:rgba(124,58,237,0.5);margin-top:4px;display:block;">⚡ Réalisé par <span style="color:#c4b5fd;">MOHAMEDDIOP712</span></span></p>
+  </div>
+</div>
+
+<script>
+// ── Validation helpers ──
+const setErr = id => document.getElementById(id).classList.add('error');
+const clrErr = id => document.getElementById(id).classList.remove('error');
+
+document.getElementById('nomMaillot').addEventListener('input',  () => clrErr('f-name'));
+document.getElementById('numero').addEventListener('input',       () => clrErr('f-num'));
+document.getElementById('taille').addEventListener('change',      () => clrErr('f-size'));
+
+// ── Submit ──
+document.getElementById('jerseyForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const nom    = document.getElementById('nomMaillot').value.trim();
+  const numero = document.getElementById('numero').value.trim();
+  const taille = document.getElementById('taille').value;
+  const btn    = document.getElementById('submitBtn');
+  let ok = true;
+
+  if (!nom || nom.length < 2)                       { setErr('f-name'); ok = false; } else clrErr('f-name');
+  const n = parseInt(numero);
+  if (!numero || isNaN(n) || n < 1 || n > 99)       { setErr('f-num');  ok = false; } else clrErr('f-num');
+  if (!taille)                                       { setErr('f-size'); ok = false; } else clrErr('f-size');
+
+  if (!ok) {
+    // Shake
+    const card = document.querySelector('.card');
+    const moves = ['-7px','7px','-4px','4px','0'];
+    moves.forEach((x, i) => setTimeout(() => card.style.transform = `translateX(${x})`, i * 65));
+    return;
+  }
+
+  btn.classList.add('loading'); btn.disabled = true;
+
+  fetch('https://formspree.io/f/xeelybdr', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      'Nom sur le maillot': nom,
+      'Numéro': numero,
+      'Taille': taille
+    })
+  })
+  .then(res => {
+    btn.classList.remove('loading'); btn.disabled = false;
+    if (res.ok) {
+      document.getElementById('sNameBig').textContent = nom.toUpperCase();
+      document.getElementById('sName').textContent    = nom;
+      document.getElementById('sNum').textContent     = '#' + numero;
+      document.getElementById('sSize').textContent    = taille;
+      document.getElementById('formSection').style.display   = 'none';
+      document.getElementById('successSection').style.display = 'block';
+      confetti();
+    } else {
+      alert('❌ Erreur lors de l\'envoi. Réessaie.');
+    }
+  })
+  .catch(() => {
+    btn.classList.remove('loading'); btn.disabled = false;
+    alert('❌ Erreur réseau. Vérifie ta connexion.');
+  });
+});
+
+// ── Reset ──
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('jerseyForm').reset();
+  ['f-name','f-num','f-size'].forEach(clrErr);
+  document.getElementById('successSection').style.display = 'none';
+  document.getElementById('formSection').style.display    = 'block';
+});
+
+// ── Confetti ──
+function confetti() {
+  if (!document.getElementById('cKF')) {
+    const s = document.createElement('style'); s.id = 'cKF';
+    s.textContent = '@keyframes cf{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--r)) scale(0);opacity:0}}';
+    document.head.appendChild(s);
+  }
+  const card   = document.querySelector('.card');
+  const colors = ['#7c3aed','#06b6d4','#ec4899','#10b981','#f59e0b','#c4b5fd'];
+  for (let i = 0; i < 48; i++) {
+    const el = document.createElement('div');
+    el.style.cssText = `
+      position:absolute;pointer-events:none;z-index:20;
+      width:${3+Math.random()*6}px;height:${3+Math.random()*6}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      border-radius:${Math.random()>.4?'50%':'2px'};
+      left:${15+Math.random()*70}%;top:40%;
+      --dx:${(Math.random()-.5)*320}px;
+      --dy:${-(Math.random()*200+60)}px;
+      --r:${Math.random()*720-360}deg;
+      animation:cf ${.6+Math.random()*.9}s ease-out forwards;
+    `;
+    card.appendChild(el);
+    setTimeout(() => el.remove(), 1600);
+  }
+}
+</script>
+</body>
+</html>
